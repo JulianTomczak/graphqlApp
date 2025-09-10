@@ -1,0 +1,86 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Profile {
+  id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  bio: String
+  birthDate: DateTime
+  age: Int
+  salary: Float
+  company: String
+  jobTitle: String
+  skills: [String!]
+  isVerified: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type User {
+  id: ID!
+  username: String!
+  profile: Profile!
+  isActive: Boolean!
+  registeredAt: DateTime!
+  lastLogin: DateTime
+}
+
+type Query {
+  hello: String!
+  greeting(name: String!): String!
+  users: [User!]!
+  user(id: ID!): User
+  profiles: [Profile!]!
+  profile(id: ID!): Profile!
+}
+
+type Mutation {
+  createUser(createUserInput: CreateUserInput!): User!
+  removeUser(id: ID!): Boolean!
+  createProfile(createProfileInput: CreateProfileInput!): Profile!
+  updateProfile(id: ID!, updateProfileInput: UpdateProfileInput!): Profile!
+  removeProfile(id: ID!): Boolean!
+}
+
+input CreateUserInput {
+  username: String!
+  password: String!
+  profile: CreateProfileInput!
+}
+
+input CreateProfileInput {
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: String
+  bio: String
+  birthDate: DateTime
+  age: Int
+  salary: Float
+  company: String
+  jobTitle: String
+  skills: [String!]
+}
+
+input UpdateProfileInput {
+  firstName: String
+  lastName: String
+  email: String
+  phone: String
+  bio: String
+  birthDate: DateTime
+  age: Int
+  salary: Float
+  company: String
+  jobTitle: String
+  skills: [String!]
+}
