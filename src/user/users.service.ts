@@ -11,7 +11,7 @@ export class UsersService {
   constructor(
     @InjectRepository(User)
     private usersRepo: Repository<User>,
-    private profilesService: ProfilesService, // inyectamos service de Profile
+    private profilesService: ProfilesService,
   ) {}
 
   findAll(): Promise<User[]> {
@@ -23,13 +23,12 @@ export class UsersService {
   }
 
   async create(data: CreateUserInput): Promise<User> {
-    // opcional: crear profile desde ProfilesService
     const profile = await this.profilesService.create(data.profile);
 
     const newUser = this.usersRepo.create({
       username: data.username,
       password: data.password,
-      profile, // relación 1:1
+      profile,
     });
 
     return this.usersRepo.save(newUser);
